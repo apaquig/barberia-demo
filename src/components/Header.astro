@@ -305,13 +305,7 @@ import { translations } from './translations';
   }
 
   /* Responsive Design */
-  @media (max-width: 992px) {
-    .menu-socials {
-      gap: 8px;
-    }
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .mobile-nav-toggle {
       display: flex;
     }
@@ -341,13 +335,26 @@ import { translations } from './translations';
       width: 100%;
     }
 
-    .menu-socials {
-      display: none;
-    }
-    
     .header-actions .btn-premium {
-      padding: 0;
+      padding: 0 16px;
       font-size: 0.75rem;
+      width: 110px;
+      height: 38px;
+    }
+
+    .lang-selector-container select {
+      height: 38px;
+      margin-left: 10px;
+      padding: 0 24px 0 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-actions .btn-circular-book {
+      display: none; /* Hide booking button on extremely small headers to fit logo + toggle */
+    }
+    .lang-selector-container select {
+      margin-left: 5px;
     }
   }
 </style>
