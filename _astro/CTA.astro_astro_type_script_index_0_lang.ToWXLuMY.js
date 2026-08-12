@@ -1,0 +1,1 @@
+import{t as e}from"./translations.DpqgFOat.js";window.addEventListener(`langChanged`,t=>{let n=t.detail.lang;document.querySelectorAll(`#cta-section-wrapper [data-i18n]`).forEach(t=>{let r=t.getAttribute(`data-i18n`);r&&e[n][r]&&(t.textContent=e[n][r])})});
