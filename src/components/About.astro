@@ -1,0 +1,190 @@
+---
+import { businessConfig } from '../config';
+---
+
+<section class="about-section" id="about">
+  <div class="container about-container">
+    <div class="about-image">
+      <img src="/images/about-shop.png" alt="Leo Style Corp Barber Shop Experience" loading="lazy" />
+      <div class="experience-badge">
+        <span class="number">LEO</span>
+        <span class="text">STYLE CORP</span>
+      </div>
+    </div>
+    
+    <div class="about-content">
+      <h2 class="section-title">
+        <span data-i18n="aboutTitlePart1">Más Que</span> <span class="text-gold" data-i18n="aboutTitlePart2">Un Corte de Cabello</span>
+      </h2>
+      <p class="about-lead" data-i18n="aboutLead">
+        Leo Style Corp Barber Shop trae precisión, estilo urbano y cuidado masculino profesional para la comunidad en Newark, New Jersey.
+      </p>
+      <p class="about-text" data-i18n="aboutText1">
+        Desde los fades más limpios y perfilados de barba personalizados hasta afeitados clásicos con toalla caliente, cada servicio tiene una meta clara: hacer que salgas luciendo impecable, con total confianza y listo para destacar.
+      </p>
+      <p class="about-text" data-i18n="aboutText2">
+        Fusionamos la calidez y el ambiente de una barbería latina tradicional con las últimas tendencias de la moda urbana. Ven, relájate en nuestros sillones de cuero y deja que nuestro trabajo hable por sí mismo.
+      </p>
+      
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <span class="highlight-num text-gold">100%</span>
+          <span class="highlight-label" data-i18n="aboutHighlight1">Enfoque en Precisión</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-num text-gold">5★</span>
+          <span class="highlight-label" data-i18n="aboutHighlight2">Reputación Local</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-num text-gold">#1</span>
+          <span class="highlight-label" data-i18n="aboutHighlight3">Estilo en Newark</span>
+        </div>
+      </div>
+      
+      <div class="about-cta">
+        <a href={businessConfig.bookingUrl} class="btn-premium btn-primary" data-i18n="aboutBtn">Reservar Mi Sillón</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#about [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+  });
+</script>
+
+<style>
+  .about-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-primary);
+  }
+
+  .about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.03);
+  }
+
+  .experience-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid var(--color-gold);
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2px;
+  }
+
+  .experience-badge .number {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1.1;
+  }
+
+  .experience-badge .text {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--color-white);
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .about-lead {
+    font-size: 1.15rem;
+    color: var(--color-white);
+    font-weight: 500;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+    color: rgba(245, 243, 237, 0.7);
+  }
+
+  .about-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(245, 243, 237, 0.1);
+    padding-top: 24px;
+  }
+
+  .highlight-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .highlight-num {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .highlight-label {
+    font-size: 0.75rem;
+    color: rgba(245, 243, 237, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .about-cta {
+    margin-top: 12px;
+  }
+
+  @media (max-width: 992px) {
+    .about-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+  }
+</style>

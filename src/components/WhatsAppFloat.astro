@@ -1,0 +1,75 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<a 
+  href={`https://wa.me/${businessConfig.whatsappNumber}?text=${encodeURIComponent(businessConfig.whatsappMessage)}`} 
+  class="whatsapp-float" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label="Contact us on WhatsApp"
+>
+  <SocialIcons platform="whatsapp" class="w-7 h-7" />
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1) translateY(-3px);
+    background-color: #22c35e;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  }
+
+  /* Pulse Ring Effect */
+  .whatsapp-float::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #25D366;
+    animation: whatsapp-pulse 2s infinite;
+    z-index: -1;
+    opacity: 0.8;
+  }
+
+  @keyframes whatsapp-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive styling adjust */
+  @media (max-width: 768px) {
+    .whatsapp-float {
+      width: 52px;
+      height: 52px;
+      bottom: 90px; /* offset to clear mobile bottom navigation bar */
+      right: 20px;
+    }
+  }
+</style>

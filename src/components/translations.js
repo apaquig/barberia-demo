@@ -1,0 +1,305 @@
+// Bilingual Translations Dictionary
+export const translations = {
+  es: {
+    // Nav / General
+    home: "Inicio",
+    about: "Nosotros",
+    services: "Servicios",
+    barbers: "Barberos",
+    gallery: "Galería",
+    reviews: "Opiniones",
+    contact: "Contacto",
+    location: "Ubicación",
+    bookNow: "Reserva",
+    bookYourChair: "Reservar Turno",
+    newarkBadge: "NEWARK, NEW JERSEY",
+
+    // Hero
+    heroTitlePart1: "Cortes de Precisión.",
+    heroTitlePart2: "Estilo Real.",
+    heroLead: "La barbería preferida de la comunidad latina en Newark. Fades modernos, perfilado de barba y cortes urbanos con la máxima precisión en New Jersey.",
+    heroBtnBook: "Reservar Turno",
+    heroBtnServices: "Ver Servicios",
+    badge5Star: "Servicio 5 Estrellas",
+    badgeExpert: "Barberos Hispanos",
+    badgeNewark: "Newark, NJ",
+
+    // About
+    aboutTitlePart1: "Más Que",
+    aboutTitlePart2: "Un Corte",
+    aboutLead: "Leo Style Corp Barber Shop trae precisión, estilo urbano y cuidado masculino profesional para la comunidad en Newark, New Jersey.",
+    aboutText1: "Desde los fades más limpios y perfilados de barba personalizados hasta afeitados clásicos con toalla caliente, cada servicio tiene una meta clara: hacer que salgas luciendo impecable, con total confianza y listo para destacar.",
+    aboutText2: "Fusionamos la calidez y el ambiente de una barbería latina tradicional con las últimas tendencias de la moda urbana. Ven, relájate en nuestros sillones de cuero y deja que nuestro trabajo hable por sí mismo.",
+    aboutHighlight1: "Enfoque en Precisión",
+    aboutHighlight2: "Reputación Local",
+    aboutHighlight3: "Estilo en Newark",
+    aboutBtn: "Reservar Mi Sillón",
+
+    // Services
+    servicesTitlePart1: "Servicios Diseñados para",
+    servicesTitlePart2: "Tu Estilo",
+    servicesSubtitle: "Cortes de nivel premium, afeitados clásicos y diseño de barba en Newark, NJ. (Precios de demostración)*",
+    serviceBook: "Reservar",
+    
+    serviceCutsTitle: "Corte de Caballero",
+    serviceCutsDesc: "Cortes de precisión adaptados a tu estilo personal y fisionomía.",
+    serviceFadeTitle: "Skin Fade",
+    serviceFadeDesc: "Degradados limpios, transiciones perfectas y perfilado suave con navaja.",
+    serviceBeardTitle: "Perfilado de Barba",
+    serviceBeardDesc: "Diseño y recorte de barba con acabado relajante de toalla caliente.",
+    serviceComboTitle: "Corte + Barba",
+    serviceComboDesc: "Combo completo de estilismo para una imagen pulida y nítida.",
+    serviceLineupTitle: "Marcado / Line Up",
+    serviceLineupDesc: "Delineado ultra preciso de contornos de cabello y patillas con navaja.",
+    serviceShaveTitle: "Afeitado Toalla Caliente",
+    serviceShaveDesc: "Experiencia clásica de afeitado con navaja libre, crema tibia y aceites esenciales.",
+
+    // Barbers
+    barberTitlePart1: "Conoce a tus",
+    barberTitlePart2: "Barberos",
+    barberSubtitle: "Profesionales dedicados a darte el corte limpio y premium que te mereces. (Perfiles demo)*",
+    barberBtn: "Reservar con ",
+    
+    // Instagram Feed Section
+    instaTitle: "Sigue el Estilo",
+    instaSubtitle: "Mira nuestros cortes diarios, tendencias de peinado y opiniones de clientes.",
+
+    // Gallery
+    galleryTitlePart1: "Cortes Frescos.",
+    galleryTitlePart2: "Detalles Firmes.",
+    gallerySubtitle: "Calidad y precisión real en cada sesión. Haz clic para ver detalles.",
+
+    // Reviews
+    reviewTitlePart1: "Lo que Newark",
+    reviewTitlePart2: "Está Diciendo",
+    reviewSubtitle: "Experiencias reales de clientes de nuestra comunidad. (Reseñas demo)*",
+    reviewLeave: "Déjanos una reseña en Google",
+    reviewSatisfied: "¿Satisfecho con tu corte?",
+
+    // Location / Contact
+    locTitlePart1: "Tu Barbería",
+    locTitlePart2: "En Newark",
+    locIntro: "Orgullosamente sirviendo a Newark y comunidades vecinas con servicios premium de barbería masculina.",
+    locAddress: "Dirección",
+    locCall: "Llámanos",
+    locHours: "Horario de Apertura",
+    locDirections: "Cómo Llegar",
+    locDemoNote: "(Ubicación demo editable)",
+
+    // FAQ
+    faqTitlePart1: "Preguntas",
+    faqTitlePart2: "Frecuentes",
+    faqSubtitle: "¿Tienes dudas? Aquí respondemos a las consultas más comunes de nuestros clientes.",
+    faq1Q: "¿Necesito una cita?",
+    faq1A: "Aunque recomendamos reservar tu cita en línea para asegurar tu barbero y horario preferido, también aceptamos clientes sin cita según disponibilidad.",
+    faq2Q: "¿Aceptan clientes sin cita previa (Walk-ins)?",
+    faq2A: "¡Sí! Los walk-ins son bienvenidos y se atienden en orden de llegada según la disponibilidad de nuestros barberos.",
+    faq3Q: "¿Cuánto tarda un corte de cabello?",
+    faq3A: "Un corte clásico o degradado suele tardar entre 30 y 45 minutos. Los combos de corte y barba toman cerca de 60 minutos.",
+    faq4Q: "¿Puedo reservar corte y barba juntos?",
+    faq4A: "Claro que sí. Ofrecemos el servicio combinado 'Corte + Barba' para una sesión de cuidado completo. Puedes seleccionarlo al reservar.",
+    faq5Q: "¿Hacen cortes para niños?",
+    faq5A: "Sí, realizamos cortes modernos y cómodos para niños en un ambiente agradable.",
+    faq6Q: "¿Dónde está ubicada la barbería?",
+    faq6A: "Estamos ubicados en la zona céntrica de Newark, New Jersey, de fácil acceso y transporte. Ver detalles en la sección de ubicación.",
+
+    // CTA
+    ctaTitle: "Tu Próximo Corte Empieza Aquí",
+    ctaSubtitle: "Eleva tu estilo con barbería profesional y premium en Newark, NJ. Reserva tu turno hoy mismo.",
+    ctaBook: "Reservar Turno",
+    ctaCall: "Llamar Barbería",
+
+    // Footer
+    footerDesc: "Barbería masculina premium en Newark, NJ. Mezclando estilo urbano con precisión clásica para que luzcas impecable.",
+    footerVisit: "Visítanos",
+    footerExplore: "Explorar",
+    footerCopy: "Todos los derechos reservados.",
+    footerDemoTag: "Demo de Presentación Profesional",
+
+    // Booking Modal Form
+    modalBookTitle: "Reservar Turno",
+    modalBookSubtitle: "Completa los detalles para agendar tu cita en Leo Style Corp",
+    formName: "Nombre Completo",
+    formPhone: "Número de Teléfono",
+    formService: "Servicio",
+    formSelectService: "Selecciona un servicio",
+    formBarber: "Barbero Preferido",
+    formAnyBarber: "Cualquier Barbero disponible",
+    formDate: "Fecha",
+    formTime: "Hora",
+    formSelectTime: "Selecciona la hora",
+    formSubmit: "Confirmar y Enviar Reserva",
+
+    // Newark SEO Page
+    seoTitle: "Barbería en Newark, NJ | Degradados y Barbas",
+    seoDesc: "¿Buscas la mejor barbería en Newark, NJ? Leo Style Corp ofrece cortes premium, skin fades limpios, perfilado de barba y afeitados clásicos cerca de ti.",
+    seoH1: "Barbería en Newark, NJ",
+    seoLead: "Estilo Premium, Degradados de Precisión y Perfilados de Barba Clásicos en Essex County",
+    seoIntroH2: "Cortes de Cabello para Hombres Cerca de Ti",
+    seoIntroP1: "Bienvenido a Leo Style Corp Barber Shop, el punto de encuentro de Newark para el cuidado masculino moderno. Convenientemente ubicado para servir a downtown Newark, Harrison, Ironbound y las comunidades circundantes de Essex County.",
+    seoIntroP2: "Ya sea que busques un degradado skin fade limpio, un marcado preciso o un afeitado con toalla caliente, nuestros barberos profesionales garantizan que saldrás luciendo impecable.",
+    seoIntroH3: "Especialidades Locales:",
+    seoIntroFade: "Skin Fades: Degradados perfectos en capas, drop fades y taper fades.",
+    seoIntroBeard: "Cuidado de Barba: Diseño, recorte y humectación profunda con toalla caliente.",
+    seoIntroLine: "Marcados y Perfilados: Delineado de contornos ultra limpios con navaja.",
+    seoIntroKids: "Cortes para Niños: Sesiones rápidas y cómodas para los más jóvenes.",
+    seoWhyTitle: "¿Por qué elegir a Leo Style Corp?",
+    seoWhyConvenience: "📍 Conveniencia en Newark Centro",
+    seoWhyConvenienceText: "Fácil acceso cerca del transporte público y estacionamientos.",
+    seoWhyStaff: "✂ Barberos Expertos",
+    seoWhyStaffText: "Especialistas en todo tipo de cabellos, texturas y tendencias urbanas.",
+    seoWhyAmbience: "⭐ Ambiente de Primera",
+    seoWhyAmbienceText: "Sillones de cuero clásicos en una atmósfera moderna y relajante."
+  },
+  en: {
+    // Nav / General
+    home: "Home",
+    about: "About Us",
+    services: "Services",
+    barbers: "Barbers",
+    gallery: "Gallery",
+    reviews: "Reviews",
+    contact: "Contact",
+    location: "Location",
+    bookNow: "Book",
+    bookYourChair: "Book Appointment",
+    newarkBadge: "NEWARK, NEW JERSEY",
+
+    // Hero
+    heroTitlePart1: "Precision Cuts.",
+    heroTitlePart2: "Real Style.",
+    heroLead: "The preferred barber shop for the Latino community in Newark. Modern fades, beard shaping, and urban cuts with maximum precision in New Jersey.",
+    heroBtnBook: "Book Appointment",
+    heroBtnServices: "View Services",
+    badge5Star: "5-Star Service",
+    badgeExpert: "Latino Barbers",
+    badgeNewark: "Newark, NJ",
+
+    // About
+    aboutTitlePart1: "More Than",
+    aboutTitlePart2: "A Haircut",
+    aboutLead: "Leo Style Corp Barber Shop brings precision, urban style, and professional grooming to the Newark, New Jersey community.",
+    aboutText1: "From clean skin fades and custom beard shaping to classic hot towel shaves, every service is focused on one clear goal: making you leave looking sharp, with absolute confidence, and ready to stand out.",
+    aboutText2: "We blend the warmth and vibe of a traditional Latino barber shop with the latest urban fashion trends. Come relax in our classic leather chairs and let our craft speak for itself.",
+    aboutHighlight1: "Precision Focused",
+    aboutHighlight2: "Local Reputation",
+    aboutHighlight3: "Newark Style Spot",
+    aboutBtn: "Book My Chair",
+
+    // Services
+    servicesTitlePart1: "Services Built Around",
+    servicesTitlePart2: "Your Style",
+    servicesSubtitle: "Premium cuts, classic shaves, and beard shaping in Newark, NJ. (Demo prices)*",
+    serviceBook: "Book Service",
+    
+    serviceCutsTitle: "Men's Haircut",
+    serviceCutsDesc: "Precision cuts customized to your personal style and face shape.",
+    serviceFadeTitle: "Skin Fade",
+    serviceFadeDesc: "Clean gradients, perfect transitions, and smooth razor detailing.",
+    serviceBeardTitle: "Beard Trim",
+    serviceBeardDesc: "Beard shaping and design with a relaxing hot towel finish.",
+    serviceComboTitle: "Haircut + Beard",
+    serviceComboDesc: "Complete grooming combo designed for a sharp and polished look.",
+    serviceLineupTitle: "Line Up / Shape Up",
+    serviceLineupDesc: "Ultra-precise detailing of hair contours and sideburns with a straight razor.",
+    serviceShaveTitle: "Hot Towel Shave",
+    serviceShaveDesc: "Classic straight-razor shave with warm cream and essential oils.",
+
+    // Barbers
+    barberTitlePart1: "Meet Your",
+    barberTitlePart2: "Barbers",
+    barberSubtitle: "Dedicated professionals focused on providing the clean, premium cut you deserve. (Demo profiles)*",
+    barberBtn: "Book with ",
+    
+    // Instagram Feed Section
+    instaTitle: "Follow The Style",
+    instaSubtitle: "See our daily cuts, styling updates, and fresh client reviews.",
+
+    // Gallery
+    galleryTitlePart1: "Fresh Cuts.",
+    galleryTitlePart2: "Sharp Details.",
+    gallerySubtitle: "Real quality and precision in every session. Click to view close-ups.",
+
+    // Reviews
+    reviewTitlePart1: "What Newark",
+    reviewTitlePart2: "Is Saying",
+    reviewSubtitle: "Real client experiences from our local community. (Demo reviews)*",
+    reviewLeave: "Leave us a review on Google",
+    reviewSatisfied: "Satisfied with your cut?",
+
+    // Location / Contact
+    locTitlePart1: "Your Barber Shop",
+    locTitlePart2: "In Newark",
+    locIntro: "Proudly serving Newark and nearby communities with professional men's grooming services.",
+    locAddress: "Address",
+    locCall: "Call Us",
+    locHours: "Opening Hours",
+    locDirections: "Get Directions",
+    locDemoNote: "(Editable demo location)",
+
+    // FAQ
+    faqTitlePart1: "Frequently Asked",
+    faqTitlePart2: "Questions",
+    faqSubtitle: "Got questions? We have answers. Read through our common client questions.",
+    faq1Q: "Do I need an appointment?",
+    faq1A: "While we highly recommend booking an appointment online to secure your preferred barber and slot, we also welcome walk-ins based on availability.",
+    faq2Q: "Do you accept walk-ins?",
+    faq2A: "Yes! Walk-ins are welcome and serviced on a first-come, first-served basis depending on our barbers' schedules.",
+    faq3Q: "How long does a haircut take?",
+    faq3A: "A classic cut or skin fade typically takes 30 to 45 minutes. Combined haircut and beard services take around 60 minutes.",
+    faq4Q: "Can I book a haircut and beard trim together?",
+    faq4A: "Absolutely. We offer a combined 'Haircut + Beard' grooming service for complete care. You can select this when booking.",
+    faq5Q: "Do you cut children's hair?",
+    faq5A: "Yes, we provide comfortable, stylish cuts for kids in a friendly and relaxed environment.",
+    faq6Q: "Where is the barber shop located?",
+    faq6A: "We are located in downtown Newark, New Jersey, with easy transit access. See details in the location section.",
+
+    // CTA
+    ctaTitle: "Your Next Cut Starts Here",
+    ctaSubtitle: "Upgrade your look with professional, premium barbering in Newark, NJ. Book your spot today.",
+    ctaBook: "Book Appointment",
+    ctaCall: "Call Shop",
+
+    // Footer
+    footerDesc: "Premium men's grooming in Newark, NJ. Mixing urban style with classic precision to keep you looking sharp.",
+    footerVisit: "Visit Us",
+    footerExplore: "Explore",
+    footerCopy: "All rights reserved.",
+    footerDemoTag: "Professional Presentation Web Demo",
+
+    // Booking Modal Form
+    modalBookTitle: "Book Appointment",
+    modalBookSubtitle: "Complete the details to schedule your spot at Leo Style Corp",
+    formName: "Full Name",
+    formPhone: "Phone Number",
+    formService: "Service",
+    formSelectService: "Select a service",
+    formBarber: "Preferred Barber",
+    formAnyBarber: "Any available barber",
+    formDate: "Date",
+    formTime: "Time",
+    formSelectTime: "Select time slot",
+    formSubmit: "Confirm & Send Booking",
+
+    // Newark SEO Page
+    seoTitle: "Barber Shop in Newark, NJ | Fades & Beard Trims",
+    seoDesc: "Looking for the best barber shop in Newark, NJ? Leo Style Corp offers premium cuts, clean skin fades, sharp line-ups, and classic hot towel shaves near you.",
+    seoH1: "Barber Shop in Newark, NJ",
+    seoLead: "Premium Grooming, Precision Fades & Classic Beard Detailing in Essex County",
+    seoIntroH2: "Men's Haircuts Near You",
+    seoIntroP1: "Welcome to Leo Style Corp Barber Shop, Newark's destination for modern men's grooming. Conveniently located to serve downtown Newark, Harrison, Ironbound, and surrounding Essex County communities.",
+    seoIntroP2: "Whether you need a clean skin fade, a sharp line-up, or a relaxing hot towel shave, our professional barbers ensure you walk out looking your best.",
+    seoIntroH3: "Local Specialties:",
+    seoIntroFade: "Skin Fades: Perfectly blended gradient skin fades, drop fades, and taper fades.",
+    seoIntroBeard: "Beard Grooming: Precision beard shaping, detailing, and hot towel moisturizing therapy.",
+    seoIntroLine: "Line Ups & Contours: Razor sharp detailing along your natural hairline.",
+    seoIntroKids: "Kids Haircuts: Clean, comfortable cuts for younger clients.",
+    seoWhyTitle: "Why Choose Leo Style Corp?",
+    seoWhyConvenience: "📍 Downtown Newark Convenience",
+    seoWhyConvenienceText: "Easy access near transit stops and local parking lots.",
+    seoWhyStaff: "✂ Expert Barbers",
+    seoWhyStaffText: "Specialists in all hair types, textures, and modern urban styling trends.",
+    seoWhyAmbience: "⭐ Premium Environment",
+    seoWhyAmbienceText: "Classic leather chairs in a modern, relaxing lounge layout."
+  }
+};

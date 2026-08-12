@@ -1,0 +1,83 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<div class="mobile-bottom-bar">
+  <a href={`tel:${businessConfig.phone.replace(/[^0-9+]/g, '')}`} class="bar-action-item" aria-label="Call Shop">
+    <SocialIcons platform="phone" class="w-5 h-5" />
+    <span class="bar-label">Call</span>
+  </a>
+  
+  <a href={businessConfig.bookingUrl} class="bar-action-item center-action" aria-label="Book Appointment">
+    <span class="bar-label-book">Book Now</span>
+  </a>
+  
+  <a href={`https://wa.me/${businessConfig.whatsappNumber}?text=${encodeURIComponent(businessConfig.whatsappMessage)}`} class="bar-action-item" target="_blank" rel="noopener noreferrer" aria-label="Message on WhatsApp">
+    <SocialIcons platform="whatsapp" class="w-5 h-5" />
+    <span class="bar-label">WhatsApp</span>
+  </a>
+</div>
+
+<style>
+  .mobile-bottom-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: rgba(13, 13, 13, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(182, 145, 82, 0.25);
+    z-index: 997;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .bar-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 243, 237, 0.8);
+    height: 100%;
+    transition: var(--transition-smooth);
+    gap: 4px;
+  }
+
+  .bar-action-item:active {
+    color: var(--color-gold);
+  }
+
+  .bar-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .center-action {
+    background: var(--color-gold);
+    color: var(--color-bg-primary) !important;
+    font-weight: bold;
+    border-left: 1px solid rgba(13, 13, 13, 0.2);
+    border-right: 1px solid rgba(13, 13, 13, 0.2);
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+  }
+
+  .center-action:active {
+    background: var(--color-gold-hover);
+  }
+
+  @media (max-width: 768px) {
+    .mobile-bottom-bar {
+      display: grid;
+    }
+  }
+</style>

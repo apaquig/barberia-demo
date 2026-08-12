@@ -1,0 +1,161 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import { businessConfig } from '../config';
+
+const services = [
+  {
+    title: "Corte de Cabellero",
+    description: "Cortes de precisión adaptados a tu estilo personal y fisionomía.",
+    price: "$35*",
+    image: "/images/service-haircut.png",
+    bookingUrl: businessConfig.bookingUrl
+  },
+  {
+    title: "Skin Fade",
+    description: "Degradados limpios, transiciones perfectas y perfilado suave con navaja.",
+    price: "$40*",
+    image: "/images/service-fade.png",
+    bookingUrl: businessConfig.bookingUrl
+  },
+  {
+    title: "Perfilado de Barba",
+    description: "Diseño y recorte de barba con acabado relajante de toalla caliente.",
+    price: "$25*",
+    image: "/images/service-beard.png",
+    bookingUrl: businessConfig.bookingUrl
+  },
+  {
+    title: "Corte + Barba",
+    description: "Combo completo de estilismo para una imagen pulida y nítida.",
+    price: "$55*",
+    image: "/images/hero-barber.png",
+    bookingUrl: businessConfig.bookingUrl
+  },
+  {
+    title: "Marcado / Line Up",
+    description: "Delineado ultra preciso de contornos de cabello y patillas con navaja.",
+    price: "$20*",
+    image: "/images/gallery-1.png",
+    bookingUrl: businessConfig.bookingUrl
+  },
+  {
+    title: "Afeitado Toalla Caliente",
+    description: "Experiencia clásica de afeitado con navaja libre, crema tibia y aceites esenciales.",
+    price: "$30*",
+    image: "/images/service-shave.png",
+    bookingUrl: businessConfig.bookingUrl
+  }
+];
+---
+
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-i18n="servicesTitlePart1">Servicios Diseñados para</span> <span class="text-gold" data-i18n="servicesTitlePart2">Tu Estilo</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="servicesSubtitle">Cortes de nivel premium, afeitados clásicos y diseño de barba en Newark, NJ. (Precios de demostración)*</p>
+    </div>
+    
+    <div class="services-grid" id="services-grid-container">
+      {services.map((service, index) => (
+        <ServiceCard 
+          title={service.title}
+          description={service.description}
+          price={service.price}
+          image={service.image}
+          bookingUrl={service.bookingUrl}
+          index={index}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  
+  // Translation map for cards key
+  const keys = [
+    { title: 'serviceCutsTitle', desc: 'serviceCutsDesc' },
+    { title: 'serviceFadeTitle', desc: 'serviceFadeDesc' },
+    { title: 'serviceBeardTitle', desc: 'serviceBeardDesc' },
+    { title: 'serviceComboTitle', desc: 'serviceComboDesc' },
+    { title: 'serviceLineupTitle', desc: 'serviceLineupDesc' },
+    { title: 'serviceShaveTitle', desc: 'serviceShaveDesc' }
+  ];
+
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    
+    // Update headers
+    document.querySelectorAll('#services [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update Service cards translation details
+    const cards = document.querySelectorAll('#services .service-card');
+    cards.forEach((card, index) => {
+      const cardKeys = keys[index];
+      if (cardKeys) {
+        const titleEl = card.querySelector('.service-title');
+        const descEl = card.querySelector('.service-description');
+        const btnEl = card.querySelector('.service-book-btn span');
+        
+        if (titleEl) titleEl.textContent = translations[lang][cardKeys.title];
+        if (descEl) descEl.textContent = translations[lang][cardKeys.desc];
+        if (btnEl) btnEl.textContent = translations[lang]['serviceBook'];
+      }
+    });
+  });
+</script>
+
+<style>
+  .services-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    color: rgba(245, 243, 237, 0.6);
+    font-size: 0.95rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  @media (max-width: 992px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-title {
+      font-size: 1.75rem;
+    }
+  }
+</style>

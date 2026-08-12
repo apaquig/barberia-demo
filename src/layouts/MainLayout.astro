@@ -1,0 +1,114 @@
+---
+import { businessConfig } from '../config';
+import '../styles/index.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+}
+
+const { 
+  title, 
+  description = "Premium men's barber shop in Newark, New Jersey. Precision haircuts, skin fades, beard detailing, and hot towel shaves.",
+  canonicalUrl = "https://leostylecorpbarber.com"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | {businessConfig.name}</title>
+    <meta name="title" content={`${title} | ${businessConfig.name}`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Google Fonts: Display Serif (Cinzel) + Clean Sans-Serif (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={`${title} | ${businessConfig.name}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://leostylecorpbarber.com/images/hero-barber.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={`${title} | ${businessConfig.name}`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://leostylecorpbarber.com/images/hero-barber.png" />
+
+    <!-- Local GEO & SEO Settings -->
+    <meta name="geo.region" content="US-NJ" />
+    <meta name="geo.platitude" content="40.7356" />
+    <meta name="geo.longitude" content="-74.1724" />
+    <meta name="geo.position" content="40.7356;-74.1724" />
+    <meta name="ICBM" content="40.7356, -74.1724" />
+    <meta name="DC.title" content={businessConfig.name} />
+
+    <!-- Structured Data (JSON-LD) for LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BarberShop",
+      "name": businessConfig.name,
+      "image": "https://leostylecorpbarber.com/images/hero-barber.png",
+      "@id": "https://leostylecorpbarber.com/#barbershop",
+      "url": "https://leostylecorpbarber.com",
+      "telephone": businessConfig.phone,
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": businessConfig.address,
+        "addressLocality": businessConfig.city,
+        "addressRegion": businessConfig.state,
+        "postalCode": businessConfig.zipCode,
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.7347952,
+        "longitude": -74.1747867
+      },
+      "openingHoursSpecification": businessConfig.schemaHours.map(hourStr => {
+        const parts = hourStr.split(' ');
+        return {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": parts[0].split('-').map(d => {
+            if (d === 'Mo') return 'Monday';
+            if (d === 'Tu') return 'Tuesday';
+            if (d === 'We') return 'Wednesday';
+            if (d === 'Th') return 'Thursday';
+            if (d === 'Fr') return 'Friday';
+            if (d === 'Sa') return 'Saturday';
+            if (d === 'Su') return 'Sunday';
+            return d;
+          }),
+          "opens": parts[1].split('-')[0],
+          "closes": parts[1].split('-')[1]
+        };
+      }),
+      "sameAs": [
+        businessConfig.socials.instagram,
+        businessConfig.socials.facebook,
+        businessConfig.socials.tiktok
+      ]
+    })} />
+  </head>
+  <body>
+    <slot />
+    
+    <script>
+      import './global-booking.js';
+    </script>
+  </body>
+</html>

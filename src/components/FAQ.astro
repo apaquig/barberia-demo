@@ -1,0 +1,267 @@
+---
+import { businessConfig } from '../config';
+
+const faqs = [
+  {
+    question: "Do I need an appointment?",
+    answer: "While we highly recommend booking an appointment online to secure your preferred barber and time slot, we do welcome walk-ins based on availability. Booking online is fast and guarantees you sit in the chair without waiting."
+  },
+  {
+    question: "Do you accept walk-ins?",
+    answer: "Yes! Walk-ins are accepted and serviced on a first-come, first-served basis depending on our barbers' schedules. If we are fully booked, we will help you schedule the next available slot or book for a future day."
+  },
+  {
+    question: "How long does a haircut take?",
+    answer: "A standard precision men's haircut or skin fade session typically takes between 30 to 45 minutes. Services combining both haircut and detailed beard grooming usually take about 60 minutes to ensure perfect, sharp details."
+  },
+  {
+    question: "Can I book a haircut and beard trim together?",
+    answer: "Absolutely. We offer a combined 'Haircut + Beard' grooming service designed specifically for clients looking for a complete, synchronized style refresh. You can select this option directly from our booking system."
+  },
+  {
+    question: "Do you cut children's hair?",
+    answer: "Yes, we provide comfortable, stylish haircuts for kids. Our team knows how to make younger clients feel relaxed while delivering a sharp, clean look."
+  },
+  {
+    question: "Where is Leo Style Corp Barber Shop located?",
+    answer: `Our shop is located in the heart of Newark, New Jersey, nearby local landmarks and transit. For our exact address details and easy driving directions, please refer to our Newark Location section above.`
+  }
+];
+---
+
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-i18n="faqTitlePart1">Preguntas</span> <span class="text-gold" data-i18n="faqTitlePart2">Frecuentes</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="faqSubtitle">¿Tienes dudas? Aquí respondemos a las consultas más comunes de nuestros clientes.</p>
+    </div>
+
+    <div class="faq-accordion-wrapper">
+      {faqs.map((faq, index) => (
+        <div class="faq-item" data-index={index}>
+          <button class="faq-trigger" aria-expanded="false" aria-controls={`faq-answer-${index}`}>
+            <span class="faq-question">{faq.question}</span>
+            <span class="faq-icon-indicator">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer-container" id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`}>
+            <div class="faq-answer-inner">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  const faqKeys = [
+    { q: 'faq1Q', a: 'faq1A' },
+    { q: 'faq2Q', a: 'faq2A' },
+    { q: 'faq3Q', a: 'faq3A' },
+    { q: 'faq4Q', a: 'faq4A' },
+    { q: 'faq5Q', a: 'faq5A' },
+    { q: 'faq6Q', a: 'faq6A' }
+  ];
+
+  function translateFAQ(lang: 'es' | 'en') {
+    // Update headers
+    document.querySelectorAll('.faq-section [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update accordion questions/answers
+    document.querySelectorAll('.faq-item').forEach((item, index) => {
+      const keys = faqKeys[index];
+      if (keys) {
+        const qEl = item.querySelector('.faq-question');
+        const aEl = item.querySelector('.faq-answer-inner p');
+        if (qEl) qEl.textContent = translations[lang][keys.q];
+        if (aEl) aEl.textContent = translations[lang][keys.a];
+      }
+    });
+  }
+
+  // Handle dynamic language toggle events
+  window.addEventListener('langChanged', (e: any) => {
+    translateFAQ(e.detail.lang);
+  });
+
+  // Run on initial load to match starting language
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = (localStorage.getItem('selected-lang') || 'es') as 'es' | 'en';
+    translateFAQ(savedLang);
+  });
+
+  // Fallback trigger in case DOMContentLoaded already fired before script execution
+  const savedLangFallback = (localStorage.getItem('selected-lang') || 'es') as 'es' | 'en';
+  translateFAQ(savedLangFallback);
+</script>
+
+<style>
+  .faq-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    color: rgba(245, 243, 237, 0.6);
+    font-size: 0.95rem;
+  }
+
+  .faq-accordion-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: rgba(23, 23, 23, 0.85);
+    border: 1px solid rgba(182, 145, 82, 0.1);
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+  }
+
+  .faq-item:hover {
+    border-color: rgba(182, 145, 82, 0.3);
+  }
+
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--color-white);
+  }
+
+  .faq-question {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .faq-icon-indicator {
+    color: var(--color-gold);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .faq-icon-indicator svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Accordion collapse mechanics */
+  .faq-answer-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-answer-inner {
+    padding: 0 24px 24px 24px;
+    color: rgba(245, 243, 237, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border-top: 1px solid rgba(245, 243, 237, 0.05);
+    padding-top: 16px;
+  }
+
+  /* Active/Open styles */
+  .faq-item.active {
+    border-color: var(--color-gold);
+    box-shadow: 0 4px 20px rgba(182, 145, 82, 0.05);
+  }
+
+  .faq-item.active .faq-icon-indicator {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 576px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+    .faq-trigger {
+      padding: 16px;
+    }
+    .faq-question {
+      font-size: 0.95rem;
+    }
+    .faq-answer-inner {
+      padding: 0 16px 16px 16px;
+      padding-top: 12px;
+    }
+  }
+</style>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq-trigger');
+    const answerContainer = item.querySelector('.faq-answer-container') as HTMLElement;
+
+    if (trigger && answerContainer) {
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+            const otherTrigger = otherItem.querySelector('.faq-trigger');
+            const otherContainer = otherItem.querySelector('.faq-answer-container') as HTMLElement;
+            if (otherTrigger && otherContainer) {
+              otherTrigger.setAttribute('aria-expanded', 'false');
+              otherContainer.style.maxHeight = '0';
+            }
+          }
+        });
+
+        // Toggle current item
+        if (isOpen) {
+          item.classList.remove('active');
+          trigger.setAttribute('aria-expanded', 'false');
+          answerContainer.style.maxHeight = '0';
+        } else {
+          item.classList.add('active');
+          trigger.setAttribute('aria-expanded', 'true');
+          answerContainer.style.maxHeight = answerContainer.scrollHeight + 'px';
+        }
+      });
+    }
+  });
+</script>

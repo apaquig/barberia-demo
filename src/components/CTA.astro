@@ -1,0 +1,117 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<section class="cta-section" id="cta-section-wrapper">
+  <div class="cta-bg-overlay"></div>
+  <div class="container cta-container">
+    <div class="cta-content">
+      <h2 class="cta-title" data-i18n="ctaTitle">Tu Próximo Corte Empieza Aquí</h2>
+      <p class="cta-text" data-i18n="ctaSubtitle">Eleva tu estilo con barbería profesional y premium en Newark, NJ. Reserva tu turno hoy mismo.</p>
+      
+      <div class="cta-btn-group">
+        <a href={businessConfig.bookingUrl} class="btn-premium btn-primary" data-i18n="ctaBook">Reservar Turno</a>
+        <a href={`tel:${businessConfig.phone.replace(/[^0-9+]/g, '')}`} class="btn-premium btn-outline" aria-label={`Call us at ${businessConfig.phone}`}>
+          <SocialIcons platform="phone" class="w-4 h-4 mr-2" />
+          <span data-i18n="ctaCall">Llamar Barbería</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#cta-section-wrapper [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+  });
+</script>
+
+<style>
+  .cta-section {
+    position: relative;
+    padding: 120px 0;
+    background-image: url('/images/hero-barber.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Parallax fallback for mobile devices */
+  @media (max-width: 768px) {
+    .cta-section {
+      background-attachment: scroll;
+    }
+  }
+
+  .cta-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.9);
+    border-top: 1px solid rgba(182, 145, 82, 0.2);
+    border-bottom: 1px solid rgba(182, 145, 82, 0.2);
+    z-index: 1;
+  }
+
+  .cta-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta-title {
+    font-size: 2.75rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  .cta-text {
+    font-size: 1.15rem;
+    color: rgba(245, 243, 237, 0.8);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .cta-btn-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .cta-btn-group .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .cta-title {
+      font-size: 2rem;
+    }
+    .cta-text {
+      font-size: 1rem;
+    }
+  }
+</style>

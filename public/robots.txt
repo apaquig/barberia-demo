@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leostylecorpbarber.com/sitemap-index.xml

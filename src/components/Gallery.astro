@@ -1,0 +1,326 @@
+---
+const galleryItems = [
+  { image: "/images/gallery-1.png", alt: "Skin Fade Cut Close Up", size: "square" },
+  { image: "/images/gallery-2.png", alt: "Classic Pompadour Haircut Back View", size: "vertical" },
+  { image: "/images/gallery-3.png", alt: "Perfect Styled Beard Outline Detail", size: "horizontal" },
+  { image: "/images/gallery-4.png", alt: "Professional Barber Grooming Station Tools", size: "square" }
+];
+---
+
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-i18n="galleryTitlePart1">Cortes Frescos.</span> <span class="text-gold" data-i18n="galleryTitlePart2">Detalles Firmes.</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="gallerySubtitle">Calidad y precisión real en cada sesión. Haz clic para ver detalles.</p>
+    </div>
+
+    <!-- Editorial grid layout -->
+    <div class="gallery-grid">
+      {galleryItems.map((item, index) => (
+        <div class="gallery-item" data-index={index}>
+          <img src={item.image} alt={item.alt} loading="lazy" />
+          <div class="gallery-hover-overlay">
+            <span class="view-icon">🔍</span>
+            <span class="hover-text">{item.alt}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lightbox Modal container -->
+  <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous Image">&#10094;</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next Image">&#10095;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-primary);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    color: rgba(245, 243, 237, 0.6);
+    font-size: 0.95rem;
+  }
+
+  /* Unified Aspect Ratio Grid styles */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    aspect-ratio: 1 / 1; /* Force equal dimensions */
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Overlay on Hover */
+  .gallery-hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.8);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(182, 145, 82, 0.4);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  .gallery-item:hover .gallery-hover-overlay {
+    opacity: 1;
+  }
+
+  .view-icon {
+    font-size: 1.5rem;
+    color: var(--color-gold);
+  }
+
+  .hover-text {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-white);
+  }
+
+  /* Lightbox Styles */
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 1px solid rgba(182, 145, 82, 0.3);
+  }
+
+  #lightbox-caption {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--color-gold);
+    text-align: center;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    font-size: 3rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .lightbox-close:hover {
+    color: var(--color-gold);
+  }
+
+  .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(23, 23, 23, 0.8);
+    border: 1px solid rgba(182, 145, 82, 0.2);
+    color: var(--color-white);
+    font-size: 1.5rem;
+    padding: 16px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border-radius: 4px;
+  }
+
+  .lightbox-prev:hover, .lightbox-next:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+
+  .lightbox-prev { left: 40px; }
+  .lightbox-next { right: 40px; }
+
+  @media (max-width: 992px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .lightbox-prev, .lightbox-next {
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+  }
+</style>
+
+<script>
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const lightbox = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+
+  let currentIndex = 0;
+  const images = Array.from(galleryItems).map(item => ({
+    src: item.querySelector('img')?.getAttribute('src') || '',
+    alt: item.querySelector('img')?.getAttribute('alt') || ''
+  }));
+
+  function openLightbox(index: number) {
+    if (!lightbox || !lightboxImg || !lightboxCaption) return;
+    currentIndex = index;
+    lightboxImg.src = images[currentIndex].src;
+    lightboxImg.alt = images[currentIndex].alt;
+    lightboxCaption.textContent = images[currentIndex].alt;
+    lightbox.style.display = 'flex';
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.style.display = 'none';
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = 'auto';
+  }
+
+  function showNext() {
+    openLightbox((currentIndex + 1) % images.length);
+  }
+
+  function showPrev() {
+    openLightbox((currentIndex - 1 + images.length) % images.length);
+  }
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (nextBtn) nextBtn.addEventListener('click', showNext);
+  if (prevBtn) prevBtn.addEventListener('click', showPrev);
+
+  // Close lightbox on clicking outside content
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox || lightbox.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+
+  // Client-Side Bilingual Translations
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#gallery [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update gallery image overlay hover texts
+    const overlays = document.querySelectorAll('#gallery .gallery-item .hover-text');
+    const imageAltsEs = [
+      "Corte Skin Fade a Detalle",
+      "Corte Pompadour Clásico Vista Trasera",
+      "Perfilado de Barba y Delineado Perfecto",
+      "Estación de Barbería Profesional y Herramientas"
+    ];
+    const imageAltsEn = [
+      "Skin Fade Cut Close Up",
+      "Classic Pompadour Haircut Back View",
+      "Perfect Styled Beard Outline Detail",
+      "Professional Barber Grooming Station Tools"
+    ];
+
+    overlays.forEach((overlay, index) => {
+      const altText = lang === 'en' ? imageAltsEn[index] : imageAltsEs[index];
+      if (overlay) overlay.textContent = altText;
+    });
+  });
+</script>

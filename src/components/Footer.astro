@@ -1,0 +1,288 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<footer class="footer-section">
+  <div class="container footer-container">
+    <div class="footer-column logo-col">
+      <a href="/" class="footer-logo" aria-label="Leo Style Corp Barber Shop Home">
+        <div class="logo-top">LEO STYLE CORP</div>
+        <div class="logo-bottom">BARBER SHOP</div>
+      </a>
+      <p class="logo-desc" data-i18n="footerDesc">
+        Premium men's grooming in Newark, NJ. Mixing urban style with classic precision to keep you looking sharp.
+      </p>
+      
+      <div class="footer-socials">
+        <a href={businessConfig.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <SocialIcons platform="instagram" class="w-5 h-5" />
+        </a>
+        <a href={businessConfig.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <SocialIcons platform="facebook" class="w-5 h-5" />
+        </a>
+        <a href={businessConfig.socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <SocialIcons platform="tiktok" class="w-5 h-5" />
+        </a>
+        <a href={`https://wa.me/${businessConfig.whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <SocialIcons platform="whatsapp" class="w-5 h-5" />
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-column links-col" id="footer-links-col">
+      <h3 class="col-title" data-i18n="footerExplore">Explorar</h3>
+      <ul class="footer-links">
+        <li><a href="/#about" data-i18n="about">Nosotros</a></li>
+        <li><a href="/#services" data-i18n="services">Servicios</a></li>
+        <li><a href="/#barbers" data-i18n="barbers">Barberos</a></li>
+        <li><a href="/#gallery" data-i18n="gallery">Galería</a></li>
+        <li><a href="/barber-shop-newark-nj" data-i18n="location">Ubicación</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column contact-col">
+      <h3 class="col-title" data-i18n="footerVisit">Visítanos</h3>
+      <p class="address-line">{businessConfig.address}</p>
+      <p class="address-line">{businessConfig.city}, {businessConfig.state} {businessConfig.zipCode}</p>
+      <a href={`tel:${businessConfig.phone.replace(/[^0-9+]/g, '')}`} class="phone-link">{businessConfig.phone}</a>
+      
+      <div class="footer-hours">
+        <h4 class="hours-title text-gold" data-i18n="locHours">Horario de Apertura</h4>
+        <div id="footer-hours-list">
+          {businessConfig.openingHours.map(item => (
+            <p class="hours-detail">
+              <span class="days">{item.days}:</span> {item.hours}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container bottom-container">
+      <p>&copy; {new Date().getFullYear()} {businessConfig.name}. <span data-i18n="footerCopy">Todos los derechos reservados.</span></p>
+      <p class="demo-tag text-gold" data-i18n="footerDemoTag">Demo de Presentación Profesional</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('.footer-section [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update footer days translation labels
+    const daysElements = document.querySelectorAll('#footer-hours-list .hours-detail');
+    if (lang === 'en') {
+      const enDays = ["Monday - Friday:", "Saturday:", "Sunday:"];
+      daysElements.forEach((el, index) => {
+        const span = el.querySelector('.days');
+        if (span) span.textContent = enDays[index];
+      });
+    } else {
+      const esDays = ["Lunes - Viernes:", "Sábado:", "Domingo:"];
+      daysElements.forEach((el, index) => {
+        const span = el.querySelector('.days');
+        if (span) span.textContent = esDays[index];
+      });
+    }
+  });
+</script>
+
+<style>
+  .footer-section {
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid rgba(182, 145, 82, 0.15);
+    padding: 80px 0 0 0;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-top {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-white);
+  }
+
+  .logo-bottom {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--color-gold);
+    margin-top: 2px;
+  }
+
+  .logo-desc {
+    font-size: 0.9rem;
+    color: rgba(245, 243, 237, 0.6);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+  }
+
+  .footer-socials a:hover {
+    transform: scale(1.15) translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Official Brand Colors (Circle Fills) in Footer */
+  .footer-socials a[aria-label="Instagram"] {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border: none;
+  }
+
+  .footer-socials a[aria-label="Facebook"] {
+    background-color: #1877F2;
+  }
+
+  .footer-socials a[aria-label="TikTok"] {
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .footer-socials a[aria-label="TikTok"]:hover {
+    box-shadow: -2px -2px 0px #00f2fe, 2px 2px 0px #fe0979;
+  }
+
+  .footer-socials a[aria-label="WhatsApp"] {
+    background-color: #25D366;
+  }
+
+  .col-title {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+    border-left: 2px solid var(--color-gold);
+    padding-left: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+    color: rgba(245, 243, 237, 0.6);
+    transition: var(--transition-smooth);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-gold);
+    padding-left: 4px;
+  }
+
+  .address-line {
+    font-size: 0.9rem;
+    color: rgba(245, 243, 237, 0.7);
+  }
+
+  .phone-link {
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    transition: var(--transition-smooth);
+    font-weight: 600;
+  }
+
+  .phone-link:hover {
+    color: var(--color-white);
+  }
+
+  .footer-hours {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hours-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .hours-detail {
+    font-size: 0.8rem;
+    color: rgba(245, 243, 237, 0.5);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(245, 243, 237, 0.05);
+    padding: 30px 0;
+    font-size: 0.8rem;
+    color: rgba(245, 243, 237, 0.4);
+  }
+
+  .bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .demo-tag {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+    .footer-section {
+      padding-bottom: 64px; /* leaves room for mobile bottom bar */
+    }
+  }
+</style>

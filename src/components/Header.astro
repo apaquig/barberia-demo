@@ -1,0 +1,447 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+import { translations } from './translations';
+---
+
+<header id="site-header">
+  <div class="container header-container">
+    <!-- Premium stylized typographic logo with LSC shears line style -->
+    <a href="/" class="logo" aria-label="Leo Style Corp Barber Shop Home">
+      <div class="logo-top">LEO STYLE CORP</div>
+      <div class="logo-bottom">BARBER SHOP</div>
+    </a>
+
+    <!-- Navigation links -->
+    <nav class="nav-menu" id="nav-menu">
+      <a href="/#hero" class="nav-link" data-i18n="home">{translations.es.home}</a>
+      <a href="/#about" class="nav-link" data-i18n="about">{translations.es.about}</a>
+      <a href="/#services" class="nav-link" data-i18n="services">{translations.es.services}</a>
+      <a href="/#barbers" class="nav-link" data-i18n="barbers">{translations.es.barbers}</a>
+      <a href="/#gallery" class="nav-link" data-i18n="gallery">{translations.es.gallery}</a>
+      <a href="/#reviews" class="nav-link" data-i18n="reviews">{translations.es.reviews}</a>
+      <a href="/#contact" class="nav-link" data-i18n="contact">{translations.es.contact}</a>
+      <a href="/barber-shop-newark-nj" class="nav-link local-link" data-i18n="location">{translations.es.location}</a>
+      
+      <!-- Social networks placed right next to Ubicación link with spacing -->
+      <div class="menu-socials">
+        <a href={businessConfig.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><SocialIcons platform="instagram" /></a>
+        <a href={businessConfig.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><SocialIcons platform="facebook" /></a>
+        <a href={businessConfig.socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok"><SocialIcons platform="tiktok" /></a>
+      </div>
+    </nav>
+
+    <!-- Header actions (circular booking button + language combo) -->
+    <div class="header-actions">
+      <a href={businessConfig.bookingUrl} class="btn-premium btn-circular-book" aria-label="Reservar turno" id="header-booking-btn">
+        <span data-i18n="bookNow">{translations.es.bookNow}</span>
+      </a>
+
+      <!-- Language Picker Select Dropdown (Placed AFTER book button) -->
+      <div class="lang-selector-container">
+        <select id="lang-selector" aria-label="Cambiar idioma / Change language">
+          <option value="es" selected>ES</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
+      
+      <!-- Hamburger Menu Icon -->
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  #site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(182, 145, 82, 0.1);
+    z-index: 1000;
+    transition: var(--transition-smooth);
+  }
+
+  .header-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    white-space: nowrap;
+    text-decoration: none;
+    margin-right: 40px;
+  }
+
+  .logo-top {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-white);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .logo-bottom {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    color: var(--color-gold);
+    line-height: 1.1;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 20px;
+    margin-right: auto;
+  }
+
+  .nav-link {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-white);
+    position: relative;
+    transition: var(--transition-smooth);
+    padding: 6px 0;
+    white-space: nowrap;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-gold);
+    transition: var(--transition-smooth);
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--color-gold);
+  }
+
+  .nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+  }
+
+  .local-link {
+    /* Inherit default styles, only highlighted when active */
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .header-socials {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-socials a {
+    color: rgba(245, 243, 237, 0.7);
+    transition: var(--transition-smooth);
+  }
+
+  .header-socials a:hover {
+    color: var(--color-gold);
+    transform: scale(1.1);
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .mobile-nav-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: var(--transition-smooth);
+    border-radius: 2px;
+  }
+
+  .menu-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+    margin-right: 25px;
+  }
+
+  .menu-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+  }
+
+  .menu-socials a:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Corrected Instagram Gradient Fill */
+  .menu-socials a[aria-label="Instagram"] {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border: none;
+  }
+  
+  .menu-socials a[aria-label="Facebook"] {
+    background-color: #1877F2;
+  }
+
+  .menu-socials a[aria-label="TikTok"] {
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .menu-socials a[aria-label="TikTok"]:hover {
+    box-shadow: -2px -2px 0px #00f2fe, 2px 2px 0px #fe0979;
+  }
+
+  .menu-socials a[aria-label="WhatsApp"] {
+    background-color: #25D366;
+  }
+
+  /* Rounded Pill Booking Button Styles */
+  .btn-circular-book {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 42px;
+    border-radius: 50px;
+    background-color: var(--color-gold);
+    color: var(--color-bg-primary) !important;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(182, 145, 82, 0.2);
+  }
+
+  /* Language Selector Styles */
+  .lang-selector-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-selector-container select {
+    background: #171717 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F5F3ED'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background-size: 11px;
+    color: var(--color-white);
+    border: 1px solid rgba(182, 145, 82, 0.5);
+    border-radius: 6px;
+    padding: 0 32px 0 14px;
+    height: 42px; /* Matches the Reserva button height */
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    outline: none;
+    margin-left: 20px;
+    margin-right: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-clip: padding-box;
+  }
+
+  .lang-selector-container select:hover, .lang-selector-container select:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 8px rgba(182, 145, 82, 0.2);
+  }
+
+  .btn-circular-book:hover {
+    background-color: transparent;
+    color: var(--color-gold) !important;
+    border-color: var(--color-gold);
+    transform: scale(1.04);
+    box-shadow: 0 0 15px rgba(182, 145, 82, 0.4);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .menu-socials {
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mobile-nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--color-bg-secondary);
+      border-left: 1px solid rgba(182, 145, 82, 0.15);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 100px 32px 32px 32px;
+      gap: 24px;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      width: 100%;
+    }
+
+    .menu-socials {
+      display: none;
+    }
+    
+    .header-actions .btn-premium {
+      padding: 0;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (toggleBtn && navMenu) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', !isExpanded);
+      toggleBtn.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  }
+
+  // Intersection Observer to highlight active hash links
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-menu .nav-link:not(.local-link)');
+  const localLink = document.querySelector('.nav-menu .local-link');
+
+  // Highlight Newark Location link if on that specific page path
+  if (localLink && window.location.pathname.includes('barber-shop-newark-nj')) {
+    localLink.classList.add('active');
+  }
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-30% 0px -60% 0px', // detects sections in reading view area
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href.endsWith(`#${id}`)) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+
+  // Client-Side Bilingual Translations Pipeline
+  import { translations } from './translations';
+
+  const langSelector = document.getElementById('lang-selector') as HTMLSelectElement;
+
+  function updatePageLanguage(lang: 'es' | 'en') {
+    document.documentElement.lang = lang;
+    localStorage.setItem('selected-lang', lang);
+
+    // Update current document elements with data-i18n attributes
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Notify all components in DOM to translate themselves
+    window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang } }));
+  }
+
+  if (langSelector) {
+    // Load previously selected language from localStorage
+    const savedLang = localStorage.getItem('selected-lang') as 'es' | 'en';
+    if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
+      langSelector.value = savedLang;
+      updatePageLanguage(savedLang);
+    } else {
+      updatePageLanguage('es');
+    }
+
+    langSelector.addEventListener('change', (e) => {
+      const selected = (e.target as HTMLSelectElement).value as 'es' | 'en';
+      updatePageLanguage(selected);
+    });
+  }
+</script>

@@ -1,0 +1,304 @@
+---
+import { businessConfig } from '../config';
+
+const reviews = [
+  {
+    author: "Sample Client John",
+    location: "Newark, NJ",
+    rating: 5,
+    text: "The skin fade here is razor sharp and the service is incredibly professional. The atmosphere is top tier.",
+    date: "1 week ago"
+  },
+  {
+    author: "Sample Client Michael",
+    location: "Harrison, NJ",
+    rating: 5,
+    text: "Best beard trim I have had. The hot towel treatment is a complete game changer. I will definitely be back.",
+    date: "2 weeks ago"
+  },
+  {
+    author: "Sample Client Adrian",
+    location: "Newark, NJ",
+    rating: 5,
+    text: "Excellent service, attention to detail and a very clean, premium space. Highly recommended.",
+    date: "1 month ago"
+  }
+];
+---
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-i18n="reviewTitlePart1">What Newark Is</span> <span class="text-gold" data-i18n="reviewTitlePart2">Saying</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="reviewSubtitle">Real client experiences from our community. (Reseñas de demostración)*</p>
+    </div>
+
+    <div class="reviews-grid">
+      {reviews.map((review, idx) => (
+        <div class="review-card card-glass">
+          <div class="review-header">
+            <div class="stars">
+              {Array.from({ length: review.rating }).map(() => (
+                <span class="star">★</span>
+              ))}
+            </div>
+            <!-- Google Review Icon Badge -->
+            <div class="google-badge-icon" aria-label="Verificado en Google">
+              <svg viewBox="0 0 24 24" class="w-4 h-4">
+                <path fill="#EA4335" d="M12 5.04c1.67 0 3.2.58 4.38 1.69l3.27-3.27C17.68 1.54 14.98 1 12 1 7.35 1 3.37 3.67 1.39 7.56l3.85 2.99c.9-2.69 3.42-4.51 6.76-4.51z"/>
+                <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.34H12v4.51h6.43c-.28 1.47-1.11 2.71-2.35 3.55l3.65 2.84c2.14-1.97 3.76-4.88 3.76-8.56z"/>
+                <path fill="#FBBC05" d="M5.24 10.55c-.23-.69-.36-1.43-.36-2.2s.13-1.51.36-2.2L1.39 3.16C.5 4.93 0 6.9 0 9s.5 4.07 1.39 5.84l3.85-2.99c-.23-.69-.36-1.43-.36-2.2S5.01 11.24 5.24 10.55z"/>
+                <path fill="#34A853" d="M12 17.51c-3.34 0-5.86-1.82-6.76-4.51L1.39 16c1.98 3.89 5.96 6.56 10.61 6.56 2.97 0 5.67-.98 7.56-2.66l-3.65-2.84c-1.07.72-2.45 1.16-4.52 1.16z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <p class="review-text">"{review.text}"</p>
+          
+          <div class="review-meta">
+            <div class="review-author-profile">
+              <div class="author-avatar">
+                <!-- User avatar vector icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="review-author">{review.author}</h4>
+                <p class="review-location">{review.location}</p>
+              </div>
+            </div>
+            <span class="review-date">{review.date}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="reviews-cta">
+      <p data-i18n="reviewSatisfied">¿Satisfecho con tu corte?</p>
+      <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="google-review-link" data-i18n="reviewLeave">
+        <svg viewBox="0 0 24 24" class="w-4 h-4 google-logo-inline">
+          <path fill="#EA4335" d="M12 5.04c1.67 0 3.2.58 4.38 1.69l3.27-3.27C17.68 1.54 14.98 1 12 1 7.35 1 3.37 3.67 1.39 7.56l3.85 2.99c.9-2.69 3.42-4.51 6.76-4.51z"/>
+          <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.34H12v4.51h6.43c-.28 1.47-1.11 2.71-2.35 3.55l3.65 2.84c2.14-1.97 3.76-4.88 3.76-8.56z"/>
+          <path fill="#FBBC05" d="M5.24 10.55c-.23-.69-.36-1.43-.36-2.2s.13-1.51.36-2.2L1.39 3.16C.5 4.93 0 6.9 0 9s.5 4.07 1.39 5.84l3.85-2.99c-.23-.69-.36-1.43-.36-2.2S5.01 11.24 5.24 10.55z"/>
+          <path fill="#34A853" d="M12 17.51c-3.34 0-5.86-1.82-6.76-4.51L1.39 16c1.98 3.89 5.96 6.56 10.61 6.56 2.97 0 5.67-.98 7.56-2.66l-3.65-2.84c-1.07.72-2.45 1.16-4.52 1.16z"/>
+        </svg>
+        <span>Déjanos una reseña en Google</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    color: rgba(245, 243, 237, 0.6);
+    font-size: 0.95rem;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .review-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 4px;
+  }
+
+  .star {
+    color: var(--color-gold);
+    font-size: 1.1rem;
+  }
+
+  .review-text {
+    font-size: 0.95rem;
+    color: rgba(245, 243, 237, 0.8);
+    font-style: italic;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .google-badge-icon svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+
+  .review-author-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-bg-secondary);
+    border: 1px solid rgba(182, 145, 82, 0.3);
+    color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .author-avatar svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .review-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(245, 243, 237, 0.1);
+    padding-top: 16px;
+    margin-top: auto;
+  }
+
+  .review-author {
+    font-size: 0.9rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .review-location {
+    font-size: 0.75rem;
+    color: rgba(245, 243, 237, 0.5);
+  }
+
+  .review-date {
+    font-size: 0.75rem;
+    color: rgba(245, 243, 237, 0.4);
+  }
+
+  .reviews-cta {
+    margin-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reviews-cta p {
+    font-size: 0.95rem;
+    color: rgba(245, 243, 237, 0.7);
+  }
+
+  .google-review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    transition: var(--transition-smooth);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+
+  .google-review-link:hover {
+    color: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  .google-review-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (max-width: 992px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#reviews [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        // Handle nested spans if exists
+        const span = el.querySelector('span');
+        if (span) {
+          span.textContent = translations[lang][key];
+        } else {
+          el.textContent = translations[lang][key];
+        }
+      }
+    });
+
+    // Update reviews quotes and dates
+    const reviewTexts = document.querySelectorAll('#reviews .review-text');
+    const reviewDates = document.querySelectorAll('#reviews .review-date');
+
+    const reviewsEs = [
+      "El degradado (skin fade) aquí es súper limpio y el servicio es muy profesional. La atmósfera es increíble.",
+      "El mejor perfilado de barba que he tenido. El tratamiento de toalla caliente es otro nivel. Definitivamente volveré.",
+      "Excelente servicio, atención a los detalles y un espacio muy limpio y premium. Súper recomendado."
+    ];
+    const reviewsEn = [
+      "The skin fade here is razor sharp and the service is incredibly professional. The atmosphere is top tier.",
+      "Best beard trim I have had. The hot towel treatment is a complete game changer. I will definitely be back.",
+      "Excellent service, attention to detail and a very clean, premium space. Highly recommended."
+    ];
+
+    const datesEs = ["Hace 1 semana", "Hace 2 semanas", "Hace 1 mes"];
+    const datesEn = ["1 week ago", "2 weeks ago", "1 month ago"];
+
+    reviewTexts.forEach((el, idx) => {
+      el.textContent = lang === 'en' ? `"${reviewsEn[idx]}"` : `"${reviewsEs[idx]}"`;
+    });
+
+    reviewDates.forEach((el, idx) => {
+      el.textContent = lang === 'en' ? datesEn[idx] : datesEs[idx];
+    });
+  });
+</script>

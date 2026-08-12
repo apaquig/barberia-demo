@@ -1,0 +1,276 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Services from '../components/Services.astro';
+import Location from '../components/Location.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import MobileBottomBar from '../components/MobileBottomBar.astro';
+import { businessConfig } from '../config';
+---
+
+<MainLayout 
+  title="Barber Shop in Newark, NJ | Fades & Beard Trims"
+  description="Looking for the best barber shop in Newark, NJ? Leo Style Corp offers premium haircuts, clean skin fades, sharp line-ups, and classic hot towel shaves near you."
+>
+  <Header />
+  
+  <main class="local-seo-page" id="local-seo-container">
+    <!-- Local Hero Header -->
+    <section class="local-hero">
+      <div class="local-hero-overlay"></div>
+      <div class="container local-hero-container">
+        <h1 class="local-h1" data-i18n="seoH1">Barbería en Newark, NJ</h1>
+        <p class="local-lead" data-i18n="seoLead">Estilo Premium, Degradados de Precisión y Perfilados de Barba Clásicos en Essex County</p>
+        <div class="local-cta">
+          <a href={businessConfig.bookingUrl} class="btn-premium btn-primary" data-i18n="bookYourChair">Reservar Turno</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local Content Section -->
+    <section class="local-intro-section">
+      <div class="container local-intro-grid">
+        <div class="intro-text">
+          <h2 class="local-h2" data-i18n="seoIntroH2">Cortes de Cabello para Hombres Cerca de Ti</h2>
+          <p id="seo-p1">
+            Bienvenido a <strong>Leo Style Corp Barber Shop</strong>, el punto de encuentro de Newark para el cuidado masculino moderno. Convenientemente ubicado para servir a downtown Newark, Harrison, Ironbound y las comunidades circundantes de Essex County.
+          </p>
+          <p id="seo-p2">
+            Ya sea que busques un degradado skin fade limpio, un marcado preciso o un afeitado con toalla caliente, nuestros barberos profesionales garantizan que saldrás luciendo impecable.
+          </p>
+          
+          <h3 class="local-h3" data-i18n="seoH3">Especialidades Locales:</h3>
+          <ul class="local-features-list">
+            <li id="li-fade"><strong>Skin Fades:</strong> Degradados perfectos en capas, drop fades y taper fades.</li>
+            <li id="li-beard"><strong>Cuidado de Barba:</strong> Diseño, recorte y humectación profunda con toalla caliente.</li>
+            <li id="li-line"><strong>Marcados y Perfilados:</strong> Delineado de contornos ultra limpios con navaja.</li>
+            <li id="li-kids"><strong>Cortes para Niños:</strong> Sesiones rápidas y cómodas para los más jóvenes.</li>
+          </ul>
+        </div>
+        
+        <div class="intro-aside card-glass">
+          <h3 class="aside-title text-gold" data-i18n="seoWhyTitle">¿Por qué elegir a Leo Style Corp?</h3>
+          <div class="aside-item">
+            <h4 data-i18n="seoWhyConvenience">📍 Conveniencia en Newark Centro</h4>
+            <p id="p-conv">Fácil acceso cerca del transporte público y estacionamientos.</p>
+          </div>
+          <div class="aside-item">
+            <h4 data-i18n="seoStaff">✂ Barberos Expertos</h4>
+            <p id="p-staff">Especialistas en todo tipo de cabellos, texturas y tendencias urbanas.</p>
+          </div>
+          <div class="aside-item">
+            <h4 data-i18n="seoWhyAmbience">⭐ Ambiente de Primera</h4>
+            <p id="p-amb">Sillones de cuero clásicos en una atmósfera moderna y relajante.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reuse sections to maintain full content delivery -->
+    <Services />
+    <Location />
+    <FAQ />
+    <CTA />
+  </main>
+
+  <Footer />
+  <WhatsAppFloat />
+  <MobileBottomBar />
+</MainLayout>
+
+<script>
+  import { translations } from '../components/translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#local-seo-container [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update paragraph and list texts manually for complex tags
+    const p1 = document.getElementById('seo-p1');
+    const p2 = document.getElementById('seo-p2');
+    const liFade = document.getElementById('li-fade');
+    const liBeard = document.getElementById('li-beard');
+    const liLine = document.getElementById('li-line');
+    const liKids = document.getElementById('li-kids');
+    const pConv = document.getElementById('p-conv');
+    const pStaff = document.getElementById('p-staff');
+    const pAmb = document.getElementById('p-amb');
+
+    if (lang === 'en') {
+      if (p1) p1.innerHTML = `Welcome to <strong>Leo Style Corp Barber Shop</strong>, Newark's destination for modern men's grooming. Conveniently located to serve downtown Newark, Harrison, Ironbound, and surrounding Essex County communities.`;
+      if (p2) p2.textContent = `Whether you need a clean skin fade, a sharp line-up, or a relaxing hot towel shave, our professional barbers ensure you walk out looking your best.`;
+      if (liFade) liFade.innerHTML = `<strong>Skin Fades:</strong> Perfectly blended gradient skin fades, drop fades, and taper fades.`;
+      if (liBeard) liBeard.innerHTML = `<strong>Beard Grooming:</strong> Precision beard shaping, detailing, and hot towel moisturizing therapy.`;
+      if (liLine) liLine.innerHTML = `<strong>Line Ups & Contours:</strong> Razor sharp detailing along your natural hairline.`;
+      if (liKids) liKids.innerHTML = `<strong>Kids Haircuts:</strong> Clean, comfortable cuts for younger clients.`;
+      if (pConv) pConv.textContent = `Easy access near transit stops and local parking lots.`;
+      if (pStaff) pStaff.textContent = `Specialists in all hair types, textures, and modern urban styling trends.`;
+      if (pAmb) pAmb.textContent = `Classic leather chairs in a modern, relaxing lounge layout.`;
+    } else {
+      if (p1) p1.innerHTML = `Bienvenido a <strong>Leo Style Corp Barber Shop</strong>, el punto de encuentro de Newark para el cuidado masculino moderno. Convenientemente ubicado para servir a downtown Newark, Harrison, Ironbound y las comunidades circundantes de Essex County.`;
+      if (p2) p2.textContent = `Ya sea que busques un degradado skin fade limpio, un marcado preciso o un afeitado con toalla caliente, nuestros barberos profesionales garantizan que saldrás luciendo impecable.`;
+      if (liFade) liFade.innerHTML = `<strong>Skin Fades:</strong> Degradados perfectos en capas, drop fades y taper fades.`;
+      if (liBeard) liBeard.innerHTML = `<strong>Cuidado de Barba:</strong> Diseño, recorte y humectación profunda con toalla caliente.`;
+      if (liLine) liLine.innerHTML = `<strong>Marcados y Perfilados:</strong> Delineado de contornos ultra limpios con navaja.`;
+      if (liKids) liKids.innerHTML = `<strong>Cortes para Niños:</strong> Sesiones rápidas y cómodas para los más jóvenes.`;
+      if (pConv) pConv.textContent = `Fácil acceso cerca del transporte público y estacionamientos.`;
+      if (pStaff) pStaff.textContent = `Especialistas en todo tipo de cabellos, texturas y tendencias urbanas.`;
+      if (pAmb) pAmb.textContent = `Sillones de cuero clásicos en una atmósfera moderna y relajante.`;
+    }
+  });
+</script>
+
+<style>
+  .local-seo-page {
+    padding-top: var(--header-height);
+  }
+
+  .local-hero {
+    position: relative;
+    padding: 100px 0;
+    background-image: url('/images/newark-facade.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    border-bottom: 1px solid rgba(182, 145, 82, 0.15);
+  }
+
+  .local-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.85);
+    z-index: 1;
+  }
+
+  .local-hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .local-h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  .local-lead {
+    font-size: 1.25rem;
+    color: var(--color-gold);
+    max-width: 700px;
+    font-weight: 500;
+  }
+
+  .local-cta {
+    margin-top: 12px;
+  }
+
+  .local-intro-section {
+    padding: 80px 0;
+    background-color: var(--color-bg-primary);
+  }
+
+  .local-intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: flex-start;
+  }
+
+  .intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .local-h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .local-h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(182, 145, 82, 0.15);
+    padding-bottom: 8px;
+  }
+
+  .local-features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .local-features-list li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.95rem;
+    color: rgba(245, 243, 237, 0.8);
+  }
+
+  .local-features-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+  }
+
+  .intro-aside {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .aside-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(182, 145, 82, 0.15);
+    padding-bottom: 12px;
+  }
+
+  .aside-item h4 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--color-white);
+  }
+
+  .aside-item p {
+    font-size: 0.85rem;
+    color: rgba(245, 243, 237, 0.6);
+  }
+
+  @media (max-width: 992px) {
+    .local-intro-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .local-h1 {
+      font-size: 2.25rem;
+    }
+    .local-lead {
+      font-size: 1rem;
+    }
+  }
+</style>

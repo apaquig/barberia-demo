@@ -1,0 +1,252 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<section class="location-section" id="contact">
+  <div class="container location-container">
+    <div class="location-info">
+      <h2 class="section-title">
+        <span data-i18n="locTitlePart1">Tu Barbería</span> <span class="text-gold" data-i18n="locTitlePart2">En Newark</span>
+      </h2>
+      <p class="location-intro" data-i18n="locIntro">
+        Orgullosamente sirviendo a Newark y comunidades vecinas con servicios premium de barbería masculina.
+      </p>
+      
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-icon text-gold">
+            <SocialIcons platform="map" class="w-5 h-5" />
+          </div>
+          <div class="contact-text">
+            <h4 data-i18n="locAddress">Dirección</h4>
+            <p>{businessConfig.address}, {businessConfig.city}, {businessConfig.state} {businessConfig.zipCode}</p>
+            <p class="detail-note" data-i18n="locDemoNote">(Ubicación demo editable)</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon text-gold">
+            <SocialIcons platform="phone" class="w-5 h-5" />
+          </div>
+          <div class="contact-text">
+            <h4 data-i18n="locCall">Llámanos</h4>
+            <a href={`tel:${businessConfig.phone.replace(/[^0-9+]/g, '')}`} class="contact-link">{businessConfig.phone}</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon text-gold">
+            <SocialIcons platform="clock" class="w-5 h-5" />
+          </div>
+          <div class="contact-text">
+            <h4 data-i18n="locHours">Horario de Apertura</h4>
+            <div id="location-hours-list">
+              {businessConfig.openingHours.map(item => (
+                <p class="hours-row">
+                  <span class="days">{item.days}:</span>
+                  <span class="hours">{item.hours}</span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="location-cta-group">
+        <a href={businessConfig.bookingUrl} class="btn-premium btn-primary" data-i18n="bookYourChair">Reservar Turno</a>
+        <a href={`https://maps.google.com/?q=${encodeURIComponent(businessConfig.address + ' ' + businessConfig.city + ' ' + businessConfig.state + ' ' + businessConfig.zipCode)}`} target="_blank" rel="noopener noreferrer" class="btn-premium btn-outline" data-i18n="locDirections">Cómo Llegar</a>
+      </div>
+    </div>
+    
+    <div class="location-map">
+      <!-- Facade preview image matching search engine needs -->
+      <div class="facade-wrapper">
+        <img src="/images/newark-facade.png" alt="Leo Style Corp Barber Shop Exterior Facade in Newark" loading="lazy" />
+      </div>
+      
+      <!-- Responsive Map Embed -->
+      <div class="map-iframe-container">
+        <iframe 
+          src={businessConfig.mapEmbedUrl} 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Google Map showing Leo Style Corp Barber Shop Location">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#contact [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update dynamic days translation labels
+    const daysElements = document.querySelectorAll('#location-hours-list .hours-row');
+    if (lang === 'en') {
+      const enDays = ["Monday - Friday:", "Saturday:", "Sunday:"];
+      daysElements.forEach((el, index) => {
+        const span = el.querySelector('.days');
+        if (span) span.textContent = enDays[index];
+      });
+    } else {
+      const esDays = ["Lunes - Viernes:", "Sábado:", "Domingo:"];
+      daysElements.forEach((el, index) => {
+        const span = el.querySelector('.days');
+        if (span) span.textContent = esDays[index];
+      });
+    }
+  });
+</script>
+
+<style>
+  .location-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-primary);
+  }
+
+  .location-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .location-intro {
+    font-size: 1.05rem;
+    color: rgba(245, 243, 237, 0.8);
+    line-height: 1.6;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 10px;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contact-icon {
+    margin-top: 4px;
+  }
+
+  .contact-text h4 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-white);
+    margin-bottom: 6px;
+  }
+
+  .contact-text p, .contact-text a {
+    font-size: 0.95rem;
+    color: rgba(245, 243, 237, 0.7);
+  }
+
+  .detail-note {
+    font-size: 0.8rem !important;
+    color: var(--color-gold) !important;
+    margin-top: 2px;
+  }
+
+  .contact-link {
+    transition: var(--transition-smooth);
+  }
+
+  .contact-link:hover {
+    color: var(--color-gold);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    max-width: 320px;
+    gap: 20px;
+  }
+
+  .hours-row .days {
+    font-weight: 500;
+  }
+
+  .hours-row .hours {
+    color: rgba(245, 243, 237, 0.6);
+  }
+
+  .location-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .location-map {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .facade-wrapper {
+    width: 100%;
+    height: 180px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 1px solid rgba(182, 145, 82, 0.15);
+  }
+
+  .facade-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .map-iframe-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(182, 145, 82, 0.15);
+  }
+
+  @media (max-width: 992px) {
+    .location-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+  }
+</style>

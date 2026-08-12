@@ -1,0 +1,226 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+
+const barbers = [
+  {
+    name: "Demo Barber Leo",
+    role: "Master Barber & Stylist",
+    image: "/images/barber-1.png",
+    experience: "10+ Years Experience",
+    instagram: businessConfig.socials.instagram
+  },
+  {
+    name: "Demo Barber Carlos",
+    role: "Fade & Shave Specialist",
+    image: "/images/barber-2.png",
+    experience: "6+ Years Experience",
+    instagram: businessConfig.socials.instagram
+  },
+  {
+    name: "Demo Barber Marcus",
+    role: "Classic Cut & Line Up Artist",
+    image: "/images/barber-3.png",
+    experience: "8+ Years Experience",
+    instagram: businessConfig.socials.instagram
+  }
+];
+---
+
+<section class="barbers-section" id="barbers">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span data-i18n="barberTitlePart1">Conoce a tus</span> <span class="text-gold" data-i18n="barberTitlePart2">Barberos</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="barberSubtitle">Profesionales dedicados a darte el corte limpio y premium que te mereces. (Perfiles demo)*</p>
+    </div>
+
+    <div class="barbers-grid">
+      {barbers.map(barber => (
+        <div class="barber-card card-glass">
+          <div class="barber-img-wrapper">
+            <img src={barber.image} alt={barber.name} loading="lazy" />
+          </div>
+          <div class="barber-info">
+            <h3 class="barber-name">{barber.name}</h3>
+            <p class="barber-role text-gold">{barber.role}</p>
+            <p class="barber-exp">{barber.experience}</p>
+            
+            <div class="barber-actions">
+              <a href={barber.instagram} class="barber-social" target="_blank" rel="noopener noreferrer" aria-label={`Follow ${barber.name} on Instagram`}>
+                <SocialIcons platform="instagram" class="w-4 h-4" />
+              </a>
+              <a href={businessConfig.bookingUrl} class="barber-book-link" data-barber={barber.name.split(' ')[2]}>Reservar con {barber.name.split(' ')[2]}</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#barbers [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Update individual booking button text
+    document.querySelectorAll('.barber-book-link').forEach(el => {
+      const barber = el.getAttribute('data-barber') || '';
+      const prefix = translations[lang]['barberBtn'];
+      el.textContent = `${prefix}${barber}`;
+    });
+
+    // Update experience tags
+    const expElements = document.querySelectorAll('.barber-exp');
+    const expEs = ["10+ Años de Experiencia", "6+ Años de Experiencia", "8+ Años de Experiencia"];
+    const expEn = ["10+ Years Experience", "6+ Years Experience", "8+ Years Experience"];
+    
+    expElements.forEach((el, index) => {
+      el.textContent = lang === 'en' ? expEn[index] : expEs[index];
+    });
+
+    // Update roles
+    const rolesElements = document.querySelectorAll('.barber-role');
+    const rolesEs = ["Master Barber y Estilista", "Especialista en Degradados y Afeitados", "Artista del Corte Clásico y Marcado"];
+    const rolesEn = ["Master Barber & Stylist", "Fade & Shave Specialist", "Classic Cut & Line Up Artist"];
+    rolesElements.forEach((el, index) => {
+      el.textContent = lang === 'en' ? rolesEn[index] : rolesEs[index];
+    });
+  });
+</script>
+
+<style>
+  .barbers-section {
+    padding: 100px 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  .section-subtitle {
+    color: rgba(245, 243, 237, 0.6);
+    font-size: 0.95rem;
+  }
+
+  .barbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .barber-card {
+    overflow: hidden;
+  }
+
+  .barber-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+  }
+
+  .barber-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .barber-card:hover .barber-img-wrapper img {
+    transform: scale(1.05);
+  }
+
+  .barber-info {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .barber-name {
+    font-size: 1.25rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+  }
+
+  .barber-role {
+    font-size: 0.85rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .barber-exp {
+    font-size: 0.85rem;
+    color: rgba(245, 243, 237, 0.5);
+  }
+
+  .barber-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(245, 243, 237, 0.1);
+  }
+
+  .barber-social {
+    color: rgba(245, 243, 237, 0.6);
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+  }
+
+  .barber-social:hover {
+    color: var(--color-gold);
+    transform: scale(1.1);
+  }
+
+  .barber-book-link {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-gold);
+    transition: var(--transition-smooth);
+  }
+
+  .barber-book-link:hover {
+    color: var(--color-white);
+  }
+
+  @media (max-width: 992px) {
+    .barbers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .barbers-grid {
+      grid-template-columns: 1fr;
+    }
+    .barber-img-wrapper {
+      height: 340px;
+    }
+  }
+</style>

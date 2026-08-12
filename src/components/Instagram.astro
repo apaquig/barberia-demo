@@ -1,0 +1,156 @@
+---
+import { businessConfig } from '../config';
+import SocialIcons from './SocialIcons.astro';
+
+const feedImages = [
+  { image: "/images/gallery-1.png", alt: "Skin fade layout detail on feed" },
+  { image: "/images/gallery-2.png", alt: "Pompadour haircut styling line up" },
+  { image: "/images/gallery-3.png", alt: "Professional beard trim details" },
+  { image: "/images/gallery-4.png", alt: "Barber styling combs close up" }
+];
+---
+
+<section class="instagram-section" id="instagram-feed-section">
+  <div class="container">
+    <div class="instagram-header">
+      <h2 class="instagram-title" data-i18n="instaTitle">Sigue el Estilo</h2>
+      <p class="instagram-subtitle" data-i18n="instaSubtitle">Mira nuestros cortes diarios, tendencias de peinado y opiniones de clientes.</p>
+    </div>
+
+    <div class="instagram-grid">
+      {feedImages.map(img => (
+        <a href={businessConfig.socials.instagram} target="_blank" rel="noopener noreferrer" class="instagram-img-card" aria-label="View post on Instagram">
+          <img src={img.image} alt={img.alt} loading="lazy" />
+          <div class="insta-overlay">
+            <SocialIcons platform="instagram" class="w-8 h-8 text-gold" />
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="instagram-cta-wrapper">
+      <a href={businessConfig.socials.instagram} target="_blank" rel="noopener noreferrer" class="insta-icon-btn" aria-label="Visit our Instagram profile">
+        <SocialIcons platform="instagram" class="w-7 h-7" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { translations } from './translations';
+  window.addEventListener('langChanged', (e: any) => {
+    const lang = e.detail.lang;
+    document.querySelectorAll('#instagram-feed-section [data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+  });
+</script>
+
+<style>
+  .instagram-section {
+    padding: 80px 0;
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid rgba(182, 145, 82, 0.1);
+  }
+
+  .instagram-header {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .instagram-title {
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  .instagram-subtitle {
+    font-size: 0.9rem;
+    color: rgba(245, 243, 237, 0.5);
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .instagram-img-card {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 2px;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .instagram-img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .insta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.85);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(182, 145, 82, 0.3);
+  }
+
+  .instagram-img-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .instagram-img-card:hover .insta-overlay {
+    opacity: 1;
+  }
+
+  .instagram-cta-wrapper {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .insta-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(23, 23, 23, 0.9);
+    border: 1px solid rgba(182, 145, 82, 0.2);
+    color: rgba(245, 243, 237, 0.7);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+  }
+
+  .insta-icon-btn:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    box-shadow: 0 0 15px rgba(182, 145, 82, 0.2);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .instagram-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+</style>

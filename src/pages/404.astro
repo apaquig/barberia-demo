@@ -1,0 +1,72 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { businessConfig } from '../config';
+---
+
+<MainLayout title="Page Not Found | 404 Error">
+  <Header />
+  
+  <main class="error-page">
+    <div class="container error-container">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Style Not Found</h1>
+      <p class="error-text">The page or style option you are looking for has been trimmed. Let's get you back to the chair.</p>
+      
+      <div class="error-actions">
+        <a href="/" class="btn-premium btn-primary">Back to Home</a>
+        <a href={businessConfig.bookingUrl} class="btn-premium btn-outline">Book Appointment</a>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</MainLayout>
+
+<style>
+  .error-page {
+    padding-top: var(--header-height);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-bg-primary);
+  }
+
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    line-height: 1;
+    font-weight: 900;
+    color: var(--color-gold);
+    text-shadow: 0 0 30px rgba(182, 145, 82, 0.2);
+  }
+
+  .error-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+  }
+
+  .error-text {
+    font-size: 1.1rem;
+    color: rgba(245, 243, 237, 0.7);
+    max-width: 500px;
+    margin-bottom: 12px;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

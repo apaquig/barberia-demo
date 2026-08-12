@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  price: string;
+  image: string;
+  bookingUrl: string;
+}
+
+const { title, description, price, image, bookingUrl } = Astro.props;
+---
+
+<div class="service-card card-glass">
+  <div class="card-image-wrapper">
+    <img src={image} alt={title} loading="lazy" />
+    <div class="price-badge">{price}</div>
+  </div>
+  <div class="card-content">
+    <h3 class="service-title">{title}</h3>
+    <p class="service-description">{description}</p>
+    <a href={bookingUrl} class="service-book-btn" data-service={title}>
+      <span data-i18n="serviceBook">Reservar</span>
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  .service-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .service-card:hover .card-image-wrapper img {
+    transform: scale(1.08);
+  }
+
+  .price-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    padding: 4px 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 2px;
+  }
+
+  .card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+  }
+
+  .service-title {
+    font-size: 1.25rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+  }
+
+  .service-description {
+    font-size: 0.9rem;
+    color: rgba(245, 243, 237, 0.7);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .service-book-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    margin-top: 8px;
+    transition: var(--transition-smooth);
+  }
+
+  .service-book-btn svg {
+    transition: transform 0.3s ease;
+    width: 16px;
+    height: 16px;
+  }
+
+  .service-card:hover .service-book-btn {
+    color: var(--color-white);
+  }
+
+  .service-card:hover .service-book-btn svg {
+    transform: translateX(4px);
+  }
+</style>
