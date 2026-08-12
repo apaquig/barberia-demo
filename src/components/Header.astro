@@ -359,6 +359,12 @@ import { translations } from './translations';
     .nav-link {
       font-size: 0.95rem;
       width: 100%;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(245, 243, 237, 0.08);
+    }
+
+    .nav-link::after {
+      display: none; /* Hide hover underline line on mobile drawer layout */
     }
 
     .header-actions .btn-premium {
